@@ -129,6 +129,123 @@
         }
       }
     }
+    "/devices": {
+      "get": {
+        "summary": "Retrieve a list of devices",
+        "description": "Fetches a paginated list of devices.",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "The page number to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of records to return per page.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A paginated list of devices.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "totalDevices": {
+                      "type": "integer",
+                      "description": "The total number of devices available.",
+                      "example": 100
+                    },
+                    "recordsFiltered": {
+                      "type": "integer",
+                      "description": "The number of devices in the current page.",
+                      "example": 5
+                    },
+                    "pageNumber": {
+                      "type": "integer",
+                      "description": "The current page number.",
+                      "example": 1
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "description": "The number of records returned per page.",
+                      "example": 5
+                    },
+                    "devices": {
+                      "type": "array",
+                      "description": "List of device objects.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "terminalId": {
+                            "type": "string",
+                            "description": "The unique identifier for the terminal.",
+                            "example": "123456"
+                          },
+                          "serialNumber": {
+                            "type": "string",
+                            "description": "The serial number of the device.",
+                            "example": "SN00123"
+                          },
+                          "model": {
+                            "type": "string",
+                            "description": "The model of the device.",
+                            "example": "Verifone VX520"
+                          },
+                          "manufacturer": {
+                            "type": "string",
+                            "description": "The manufacturer of the device.",
+                            "example": "Verifone"
+                          },
+                          "networkProvider": {
+                            "type": "string",
+                            "description": "The network provider used by the device.",
+                            "example": "MTN"
+                          },
+                          "merchantId": {
+                            "type": "string",
+                            "description": "The unique identifier of the merchant associated with the device.",
+                            "example": "M1001"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "The current status of the device.",
+                            "example": "active"
+                          },
+                          "lastUpdated": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The last updated timestamp of the device.",
+                            "example": "2025-01-05T12:00:00Z"
+                          },
+                          "deviceType": {
+                            "type": "string",
+                            "description": "The type of device.",
+                            "example": "POS"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "components": {
     "schemas": {
@@ -167,6 +284,22 @@
             }
           }
         ]
+      },
+      "Device Api": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "API documentation for retrieving a paginated list of devices.",
+            "type": "string"
+          },
+          "tag": {
+            "description": "API documentation for retrieving a paginated list of devices.",
+            "type": "string"
+          }
+        }
       },
       "Error": {
         "required": [
